@@ -27,6 +27,13 @@ architect.prototype.outputNameDelay = function(){
         console.log(that.name);
     }, 1000);
 }
+
+//Arrow funcitons use "lexical this" instead of their own value for "this", so functions defined using the arrpw notation use 
+//the "this" value of their parent scope
+architect.prototype.outputNameDelay2 = function(){
+    setTimeout(() => { console.log(this.name); }, 1000);
+};
+
 architect.prototype.newMethod = function(){
     return "Hello " + this.name;
 }
