@@ -39,3 +39,18 @@ app.use((req, res) => {
 // listen on port 8080\. The default port for http is 80, https is 443\. We use 8080 here
 // because sometimes port 80 is in use by other applications on the machine
 app.listen(HTTP_PORT, onHttpStart);
+
+//Error Handling middle-wear
+//Function with 4 parameters err, req, res, next is interpreted as an error handling functions
+function handleClientError(err, req, res, next) {
+    // log the error to the DB with a utility method to log errors  
+    logError(err);
+  
+    // if the request was an xhr request respond with a 500 status and JSON message
+    // otherwise respond with a string message
+    if (req.xhr) {
+      res.status(500).send({ message: 'There was an error processing your request' })
+    } else {
+      res.status(500).send('Something went wrong processing your request')
+    }  
+  }
