@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+    <head>
+        <title>View Data</title>
+    </head>
+
+    <body>
+        <table border='1'>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Occupation</th>
+                <th>Company</th>
+            </tr>
+            {{#if data.visible}}
+            <tr>
+                <td>{{data.name}}</td>
+                <td>{{data.age}}</td>
+                <td>{{data.occupation}}</td>
+                <td>{{data.company}}</td>
+            </tr>
+            {{else}}
+            <tr>
+                <td colspan ="4">User: '{{data.name}}' has hidden their information</td>
+            </tr>
+            {{/if}}
+            {{#unless data.contact}}
+            <tr>
+                <td colspan="4">Full-Time employee</td>
+            </tr>
+            {{/unless}}
+        </table>
+    </body>
+</html>
