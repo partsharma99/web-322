@@ -116,4 +116,31 @@ app.get("/viewData2", function(req,res){
     })
 });
 
+app.engine('.hbs', exphbs.engine({
+    extname: 'hbs',
+    helpers:{
+        helper1: function(options){
+            //helper without "context", i.e. {{#helper}}...{{/helper}}
+        },
+        helper2: function(context, options){
+            //helper with "context" i.e. {{#helper context}}...{{/helper}}
+            //Helpers with context usually used to create iterative helpers whiich work with collection of data
+        },
+        strong: function(options){
+            //Referencing options.fn(this) allows us to build a string containing new data/html in addition to the
+            //existing content within the wrapper
+            return '<strong>' + options.fn(this) + "</strong>";
+        },
+        list: function(context, options){
+            var ret = "<ul>";
+
+            for(var i = 0; i < context.length; i++){
+                ret = ret + "<li>" + options.fn(context[i]) + "</li>";
+            }
+            return ret+ "</ul>";
+        }
+
+    }
+}));
+
 app.listen(HTTP_PORT, onHttpStart);
